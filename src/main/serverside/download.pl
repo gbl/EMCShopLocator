@@ -31,5 +31,7 @@ while (my(@f)=$sth->fetchrow_array()) {
 }
 
 open(F, ">>/tmp/downloaders.dat");
-print F scalar localtime, "  ",  $rows ," downloaded by ", $cgi->param("name"), " client ", $cgi->param("clientversion"), "\n";
+print F scalar localtime, "  ",  $rows ," downloaded by ", scalar $cgi->param("name"), " client ", scalar $cgi->param("clientversion"), "\n";
 close F;
+$dbh->rollback();
+$dbh->disconnect();
